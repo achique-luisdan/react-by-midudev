@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="./css/style.css" />
+    <script
+      src="https://unpkg.com/react@17/umd/react.development.js"
+      crossorigin
+    ></script>
+    <script
+      src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"
+      crossorigin
+    ></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+  </head>
+  <body>
+    <h1>Women in Tech</h1>
+    <div id="app"></div>
+    <script type="text/babel">
+      const $app = document.getElementById("app");
+      const useState = React.useState;
+
+      const Avatar = ({ id, name, size }) => {
+        const [enabled, setEnabled] = useState(true);
+        const className = enabled ? "" : "disabled";
+        let pictureClassName = "";
+        if (size === "small") {
+          pictureClassName = "is-small";
+        } else if (size === "large") {
+          pictureClassName = "is-large";
+        }
+
+        const src = `https://randomuser.me/api/portraits/women/${id}.jpg`;
+        return (
+          <picture className={pictureClassName}>
+            <img
+              src={src}
+              onClick={() => setEnabled(!enabled)}
+              className={className}
+            />
+            <strong>{enabled ? name : "Desactivada"}</strong>
+          </picture>
+        );
+      };
+      ReactDOM.render(
+        <div>
+          <Avatar id={25} name="Andrea" size="small" />
+          <Avatar id={26} name="Daniela" />
+          <Avatar id={27} name="Roberta" size="large" />
+        </div>,
+        $app
+      );
+    </script>
+  </body>
+</html>
